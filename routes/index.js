@@ -1,8 +1,17 @@
-var express = require('express');
-var router = express.Router();
+// importando os pacotes para uso no arquivo index.js
+const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
-router.get('/', function(req, res, next) {
-  res.send({ message: "OK" });
-});
+// crio um servidor express
+const app = express();
 
-module.exports = router;
+// aplico configurações para dentro do servidor express, adicionando middlewares (body-parser, morgan, cors)
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
+
+// o servidor irá rodar dentro da porta 9000
+app.listen(9000, () => console.log('Express started at http://localhost:9000'));
